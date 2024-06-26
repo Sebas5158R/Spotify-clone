@@ -4,7 +4,7 @@ import { usePlayerStore } from "@/store/playerStore";
 export function CardPlayButton({ id, size = 'small' }) {
     const { currentSong, isPlaying, setCurrentSong, setIsPlaying } = usePlayerStore(state => state);
 
-    const isPlayingPlayList = isPlaying && currentSong?.playlist.id === id;
+    const isPlayingPlayList = isPlaying && currentSong?.playlist?.id === id;
 
     const handleClick = () => {
         if(isPlayingPlayList) {
@@ -16,8 +16,14 @@ export function CardPlayButton({ id, size = 'small' }) {
             .then(res => res.json())
             .then(data => {
                 const { songs, playlist } = data;
-                setIsPlaying(true);
-                setCurrentSong({ songs, playlist, song: songs[0] });
+                // Verificar si la canción actual pertenece a la lista de reproducción seleccionada y si es así, reanudar sin cambiar la canción
+                if (currentSong && currentSong.playlist?.id === id) {
+                    setIsPlaying(true); // Reanudar la reproducción si es la misma lista de reproducción
+                } else {
+                    // Si es una lista de reproducción diferente, empezar desde la primera canción
+                    setIsPlaying(true);
+                    setCurrentSong({ songs, playlist, song: songs[0] });
+                }
             });
     }
 

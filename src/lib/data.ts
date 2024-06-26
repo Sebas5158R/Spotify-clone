@@ -62,7 +62,7 @@ export const playlists: Playlist[] = [
     color: colors.orange,
     cover:
       "https://f4.bcbits.com/img/a0363730459_16.jpg",
-    artists: ["WFS", "Nadav Cohen"],
+    artists: ["NEFFEX"],
   },
 ];
 
@@ -318,4 +318,47 @@ export const songs: Song[] = [
     "album": "Chill Lo-Fi Music",
     "duration": "4:20"
   },
+  // CANCIONES ALBUM 6
+  {
+    "id": 1,
+    "albumId": 6,
+    "title": "Destiny",
+    "image": "https://f4.bcbits.com/img/a0363730459_16.jpg",
+    "artists": ["NEFFEX"],
+    "album": "Like a Necessity",
+    "duration": "3:26"
+  }, {
+    "id": 2,
+    "albumId": 6,
+    "title": "Failure",
+    "image": "https://f4.bcbits.com/img/a0363730459_16.jpg",
+    "artists": ["NEFFEX"],
+    "album": "Like a Necessity",
+    "duration": "3:52"
+  }, {
+    "id": 3,
+    "albumId": 6,
+    "title": "Life",
+    "image": "https://f4.bcbits.com/img/a0363730459_16.jpg",
+    "artists": ["NEFFEX"],
+    "album": "Like a Necessity",
+    "duration": "2:08"
+  }, {
+    "id": 4,
+    "albumId": 6,
+    "title": "Chance",
+    "image": "https://f4.bcbits.com/img/a0363730459_16.jpg",
+    "artists": ["NEFFEX"],
+    "album": "Like a Necessity",
+    "duration": "3:37"
+  } ,
+  {
+    "id": 5,
+    "albumId": 6,
+    "title": "A Feeling",
+    "image": "https://f4.bcbits.com/img/a0363730459_16.jpg",
+    "artists": ["NEFFEX"],
+    "album": "Like a Necessity",
+    "duration": "2:12"
+  }
 ]

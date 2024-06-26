@@ -147,6 +147,17 @@ export function Player() {
         }
     }, [currentSong]);
 
+    useEffect(() => {
+        const handleEnded = () => {
+            onNextSong();
+        };
+        const audioEl = audioRef.current;
+        audioEl.addEventListener('ended', handleEnded);
+        return () => {
+            audioEl.removeEventListener('ended', handleEnded);
+        };
+    }, [currentSong]);
+
     const getSongIndex = (id) => {
         return currentSong.songs.findIndex(e => e.id === id) ?? -1
     }
