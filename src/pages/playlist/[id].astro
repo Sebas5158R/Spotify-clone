@@ -1,7 +1,6 @@
 ---
 import MusicsTable from "@/components/MusicsTable.astro";
 import Layout from "../../layouts/Layout.astro";
-import PlayListItemCard from "@/components/PlayListItemCard.astro";
 import { allPlaylists, songs } from "@/lib/data";
 import { CardPlayButton } from "@/components/CardPlayButton";
 
@@ -11,6 +10,34 @@ const playlists = allPlaylists.find((playlist) => playlist.id === id);
 const playlistSongs = songs.filter(
   (song) => song.albumId === playlists?.albumId
 );
+
+const durationInSeconds = (duration: string): number => {
+  const parts = duration.split(":").map(Number);
+  if (parts.length === 2) {
+    // Si la duración solo tiene minutos y segundos
+    return parts[0] * 60 + parts[1]; // Convertir a segundos
+  } else if (parts.length === 3) {
+    // Si la duración incluye horas, minutos y segundos
+    return parts[0] * 3600 + parts[1] * 60 + parts[2]; // Convertir a segundos
+  } else {
+    return 0; // Duración inválida
+  }
+};
+const formatDuration = (totalSeconds: number): string => {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  if (hours > 0) {
+    return `${hours} h`;
+  } else {
+    return `${minutes} min`;
+  }
+};
+// Calcular la duración total en segundos y formatearla
+const totalDurationInSeconds = playlistSongs.reduce(
+  (acc, song) => acc + durationInSeconds(song.duration),
+  0
+);
+const formattedDuration = formatDuration(totalDurationInSeconds);
 ---
 
 <Layout title="Spotify Clone">
@@ -46,7 +73,7 @@ const playlistSongs = songs.filter(
               <span>{playlists?.artists.join(", ")}</span>
             </div>
             <p class="mt-1">
-              <span class="text-white">{playlistSongs.length} canciones</span>, 3 h aproximadamente
+              <span class="text-white">{playlistSongs.length} canciones</span>, {formattedDuration} aproximadamente
             </p>
           </div>
         </div>
